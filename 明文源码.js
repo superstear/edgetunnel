@@ -99,6 +99,7 @@ const H_API = [
   "https://addressesapi.090227.xyz/CloudFlareYes",
   "https://addressesapi.090227.xyz/ip.164746.xyz",
   "https://www.super7857.xyz/super"
+  
 ];
 export default {
   async fetch(req) {
@@ -159,3 +160,4 @@ export default {
     }
   }
 };
+
