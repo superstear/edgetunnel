@@ -89,7 +89,7 @@ const H_DOM = [
   "www.visa.com.sg",
   "acus.cloudflarest.link",
   "wz.weishao2023.dk.eu.org",
-  "achk.cloudflarest.link"
+  "achk.cloudflarest.link",
 ];
 const H_API = [
   "https://raw.githubusercontent.com/cmliu/Workervless2sub/main/addressesapi.txt?proxyip=true",
@@ -98,8 +98,7 @@ const H_API = [
   "https://addressesapi.090227.xyz/cmcc-ipv6",
   "https://addressesapi.090227.xyz/CloudFlareYes",
   "https://addressesapi.090227.xyz/ip.164746.xyz",
-  "https://www.super7857.xyz/super"
-  
+  "https://www.super7857.xyz/super",
 ];
 export default {
   async fetch(req) {
@@ -160,5 +159,6 @@ export default {
     }
   }
 };
+
 
 
