@@ -24,11 +24,13 @@ function parseAddressLine(line) {
   let host = "";
   let port = "443";
   let remark = t;
+
   if (t.includes("#")) {
     const parts = t.split("#");
     t = parts[0].trim();
     remark = parts.slice(1).join("#").trim() || t;
   }
+
   const ipv6PortMatch = t.match(/^\[([0-9a-fA-F:]+)\](?::(\d+))?$/);
   if (ipv6PortMatch) {
     host = ipv6PortMatch[1];
@@ -39,12 +41,14 @@ function parseAddressLine(line) {
     if (/^\d+$/.test(maybePort)) {
       host = t.substring(0, lastColon);
       port = maybePort;
+      if (host.includes(":")) host = `[${host}]`;
     } else {
       host = t;
     }
   } else {
     host = t;
   }
+
   host = host.trim();
   port = port.trim();
   if (!host) return null;
@@ -109,9 +113,8 @@ export default {
     try {
       const url = new URL(req.url);
       const uuid = url.searchParams.get("uuid") || "00000000-0000-0000-0000-000000000000";
-      const type = (url.searchParams.get("type") || "xhttp").toLowerCase();
       const params = {
-        type,
+        type: (url.searchParams.get("type") || "xhttp").toLowerCase(),
         encryption: url.searchParams.get("encryption") || "none",
         password: url.searchParams.get("password") || "",
         security: url.searchParams.get("security") || "",
