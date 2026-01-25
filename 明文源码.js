@@ -57,6 +57,7 @@ function parseAddressLine(line) {
 
 function buildVless(uuid, host, port, params, remark) {
   const q = new URLSearchParams();
+
   q.set("encryption", params.encryption || "none");
   if (params.security) q.set("security", params.security);
   if (params.sni) q.set("sni", params.sni);
@@ -67,6 +68,8 @@ function buildVless(uuid, host, port, params, remark) {
   q.set("type", params.type || "xhttp");
   if (params.host) q.set("host", params.host);
   if (params.path) q.set("path", params.path);
+  if (params.ech) q.set("ech", params.ech);
+
   const hostStr = host.includes(":") ? `[${host}]` : host;
   return `vless://${uuid}@${hostStr}:${port}?${q.toString()}#${encodeURIComponent(remark)}`;
 }
@@ -113,6 +116,7 @@ export default {
     try {
       const url = new URL(req.url);
       const uuid = url.searchParams.get("uuid") || "00000000-0000-0000-0000-000000000000";
+
       const params = {
         type: (url.searchParams.get("type") || "xhttp").toLowerCase(),
         encryption: url.searchParams.get("encryption") || "none",
@@ -124,7 +128,8 @@ export default {
         allowInsecure: url.searchParams.get("allowInsecure") || "",
         alpn: url.searchParams.get("alpn") || "",
         fp: url.searchParams.get("fp") || "",
-        mode: url.searchParams.get("mode") || ""
+        mode: url.searchParams.get("mode") || "",
+        ech: url.searchParams.get("ech") || ""
       };
 
       const set = new Set(H_DOM);
